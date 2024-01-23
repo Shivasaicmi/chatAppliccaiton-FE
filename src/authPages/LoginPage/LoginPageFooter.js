@@ -23,12 +23,24 @@ const LoginPageFooter = ({ handleLogin, isFormValid }) => {
   return (
     <>
       <Tooltip
-        title={!isFormValid ? getFormNotValidMessage() : getFormValidMessage()}
+        // title={!isFormValid ? getFormNotValidMessage() : getFormValidMessage()}
       >
         <div>
-          <LoginWithKeyCloak/>
+          {/* <LoginWithKeyCloak/> */}
+          <CustomPrimaryButton
+            label="Log in"
+            additionalStyles={{ marginTop: "30px" }}
+            // disabled={!isFormValid}
+            onClick={handleLogin}
+          />
         </div>
       </Tooltip>
+      <RedirectInfo
+        text="Need an account? "
+        redirectText="Create an account"
+        additionalStyles={{ marginTop: "5px" }}
+        redirectHandler={handlePushToRegisterPage}
+      />
     </>
   );
 };

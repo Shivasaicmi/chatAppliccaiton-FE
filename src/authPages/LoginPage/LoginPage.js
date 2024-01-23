@@ -7,8 +7,10 @@ import { validateLoginForm } from "../../shared/utils/validators";
 import { connect } from "react-redux";
 import { getActions } from "../../store/actions/authActions";
 import { useHistory } from "react-router-dom";
+import { useKeycloak } from "@react-keycloak/web";
 
 const LoginPage = ({ login }) => {
+  // const { keycloak } = useKeycloak();
   const history = useHistory();
 
   const [mail, setMail] = useState("");
