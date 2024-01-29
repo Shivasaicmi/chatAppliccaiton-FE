@@ -7,6 +7,9 @@ import AppBar from "./AppBar/AppBar";
 import { logout } from "../shared/utils/auth";
 import { connect } from "react-redux";
 import { getActions } from "../store/actions/authActions";
+import { useKeycloak } from "@react-keycloak/web";
+import axios from "axios";
+import { connectWithSocketServer } from "../realtimeCommunication/socketConnection";
 
 const Wrapper = styled("div")({
   width: "100%",
@@ -16,13 +19,34 @@ const Wrapper = styled("div")({
 
 const Dashboard = ({ setUserDetails }) => {
 
-  // const {keycloak} = useKeycloak();
+  const {keycloak} = useKeycloak();
 
-  // useEffect(() => {
-    // const userDetails = localStorage.getItem("user");
+  useEffect(() => {
+    const username = keycloak.tokenParsed.preferred_username;
+    console.log(username);
+    // axios.get("http://localhost:8080/users/test").then((response)=>{
+    //   console.log(response);
+    // })
 
-    // console.log(keycloak.authenticated);
-  // }, []);
+
+    let userDetails = {
+      email:keycloak?.tokenParsed?.email,
+      token:keycloak?.token,
+      userId:keycloak?.tokenParsed?.sub
+   }
+   console.log(userDetails);
+     localStorage.setItem("user", JSON.stringify(userDetails));
+
+      // const userDetails = localStorage.getItem("user");
+
+    if (!userDetails) {
+      logout();
+    } else {
+      setUserDetails(userDetails);
+      connectWithSocketServer(userDetails);
+    }
+
+  }, [keycloak]);
 
   return (
     <Wrapper>

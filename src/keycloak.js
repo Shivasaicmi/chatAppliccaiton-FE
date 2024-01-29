@@ -7,10 +7,4 @@ const keycloak = new Keycloak({
 	onLoad: 'login-required'
 });
 
-// keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
-// 	if (!authenticated) {
-// 	  keycloak.login();
-// 	}
-//   });
-
 export default keycloak

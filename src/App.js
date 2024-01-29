@@ -25,18 +25,13 @@ function App() {
             <RegisterPage />
           </Route>
           <PrivateRoute>
-          <Route exact path="/">
-            <Redirect to="/dashboard" />
-          </Route>
-          <Route exact path="/dashboard">
-              <Dashboard />
-          </Route>
-            </PrivateRoute>
-          <Route path="/">
-            <PrivateRoute>
+            <Route exact path="/">
               <Redirect to="/dashboard" />
-            </PrivateRoute>
-          </Route>
+            </Route>
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+          </PrivateRoute>
         </Switch>
       </Router>
       <AlertNotification />

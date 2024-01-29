@@ -1,6 +1,4 @@
 import { useKeycloak } from "@react-keycloak/web";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
-import {LoginPage} from "../../authPages/LoginPage/LoginPage";
 
 const PrivateRoute = ({ children }) => {
  const { keycloak,initialized } = useKeycloak();
@@ -8,8 +6,9 @@ const PrivateRoute = ({ children }) => {
  const isLoggedIn = keycloak.authenticated;
  if(keycloak.didInitialize && !keycloak.authenticated){
     keycloak.login();
- }
- console.log(keycloak);
+    
+   }
+ console.log(keycloak)
  return isLoggedIn ? children : null;
 };
 
